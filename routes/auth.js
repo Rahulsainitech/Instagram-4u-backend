@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {secretKey} = require('../keys')
+const {secretKey} = require('..config/keys')
 const middleware = require('../middleware/requireLogin')
 
 router.get('/protected',middleware, (req, res) => {
