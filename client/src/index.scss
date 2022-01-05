@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Grand+Hotel&family=Nunito:wght@200&family=Playfair+Display:ital,wght@0,400;1,600;1,900&family=Source+Sans+Pro:wght@200&display=swap');
+@mixin flexprop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.insta{
+      font-family: 'Grand Hotel', cursive;
+      padding-right: 5px;
+      
+}
+.postimage{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgb(129, 127, 127);
+}  
+.navbar1{
+    border-bottom: 1px solid rgb(99, 102, 99);
+    .navbar-brand{
+        font-size: 2rem;
+       
+    }
+    .navbar{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .nav1{
+        list-style: none;
+    }
+    .nav-link{
+        padding: 5px 9px !important;
+        font-size: 1.4rem;
+        i{
+            color: black;
+        }
+    }
+    .active{
+        i{
+        color:rgb(44, 182, 236);
+    }
+    }
+    
+}
+.home{
+    .card:nth-child(1){
+        margin-top: 6rem;
+    }
+    .card{
+       
+        @media only screen and (max-width:730px) {
+            width: 19rem !important;
+            
+        }
+        margin: 2rem auto;
+        .form-control{
+            border: none;
+            border-bottom: 1px solid grey;
+        }
+        img{
+        max-height: 65vh;
+        }
+    }
+}
+
+.create{
+    .card:nth-child(1){
+        margin-top: 7rem;
+    }
+    .card{
+        @media only screen and (max-width:730px) {
+            width: 20rem !important;
+            
+        }
+        margin: 3rem auto;
+        .form-control{
+            border: none;
+            border-bottom: 1px solid grey;
+        }
+        button{
+            display: block;
+            margin: 1rem auto;
+        }
+    }
+}
+.signin{
+    .card:nth-child(1){
+        margin-top: 7rem;
+    }
+    .card{
+        margin: 2rem auto;
+        width: 22rem;
+        .card-title{
+            font-size: 2.5rem;
+        }
+        .form-control{
+            border: none;
+            border-bottom: 2px solid rgb(20, 112, 233);
+            outline: none;
+        }
+        button{display: block;}
+    }
+}
+
+.profile{
+    margin-top: 7rem;
+    .gallery{
+        display: flex;
+        flex-wrap: wrap;
+        a{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            height: 280px;
+            width: 230px;
+            &:hover{
+                border: 2px solid rgb(185, 182, 182);
+                opacity: .9;
+            }
+        }
+    }
+    .prohead{
+        font-family:'Pushster', cursive;
+        color: rgb(41, 39, 39)
+    }
+    .setting{
+        
+        li{
+            list-style: none;
+        }
+        i{
+            font-size: 1.5rem;
+        }
+    }
+    .pic{
+        @include flexprop();
+        flex-direction: column;
+        img{
+        width: 160px;
+        height: 160px;
+        padding: 5px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 1px solid rgb(136, 133, 133)
+        }
+    }
+    .follow{
+        @include flexprop();
+        h6{
+            margin: .5rem ;
+        }
+    }
+}
+.myfollowing{
+    .no-gutters{
+@include flexprop();
+    }
+    img{
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        border: 1px solid rgb(189, 13, 233);
+        padding: 5px;
+
+    }
+}

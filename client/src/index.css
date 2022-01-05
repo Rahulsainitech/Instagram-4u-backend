@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Grand+Hotel&family=Nunito:wght@200&family=Playfair+Display:ital,wght@0,400;1,600;1,900&family=Source+Sans+Pro:wght@200&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.insta {
+  font-family: 'Grand Hotel', cursive;
+  padding-right: 5px;
+}
+
+.postimage {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #817f7f;
+}
+
+.navbar1 {
+  border-bottom: 1px solid #636663;
+}
+
+.navbar1 .navbar-brand {
+  font-size: 2rem;
+}
+
+.navbar1 .navbar {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.navbar1 .nav1 {
+  list-style: none;
+}
+
+.navbar1 .nav-link {
+  padding: 5px 9px !important;
+  font-size: 1.4rem;
+}
+
+.navbar1 .nav-link i {
+  color: black;
+}
+
+.navbar1 .active i {
+  color: #2cb6ec;
+}
+
+.home .card:nth-child(1) {
+  margin-top: 6rem;
+}
+
+.home .card {
+  margin: 2rem auto;
+}
+
+@media only screen and (max-width: 730px) {
+  .home .card {
+    width: 19rem !important;
+  }
+}
+
+.home .card .form-control {
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
+.home .card img {
+  max-height: 65vh;
+}
+
+.create .card:nth-child(1) {
+  margin-top: 7rem;
+}
+
+.create .card {
+  margin: 3rem auto;
+}
+
+@media only screen and (max-width: 730px) {
+  .create .card {
+    width: 20rem !important;
+  }
+}
+
+.create .card .form-control {
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
+.create .card button {
+  display: block;
+  margin: 1rem auto;
+}
+
+.signin .card:nth-child(1) {
+  margin-top: 7rem;
+}
+
+.signin .card {
+  margin: 2rem auto;
+  width: 22rem;
+}
+
+.signin .card .card-title {
+  font-size: 2.5rem;
+}
+
+.signin .card .form-control {
+  border: none;
+  border-bottom: 2px solid #1470e9;
+  outline: none;
+}
+
+.signin .card button {
+  display: block;
+}
+
+.profile {
+  margin-top: 7rem;
+}
+
+.profile .gallery {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.profile .gallery a {
+  margin: 0;
+  padding: 0;
+}
+
+.profile .gallery img {
+  height: 280px;
+  width: 230px;
+}
+
+.profile .gallery img:hover {
+  border: 2px solid #b9b6b6;
+  opacity: .9;
+}
+
+.profile .prohead {
+  font-family: 'Pushster', cursive;
+  color: #292727;
+}
+
+.profile .setting li {
+  list-style: none;
+}
+
+.profile .setting i {
+  font-size: 1.5rem;
+}
+
+.profile .pic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile .pic img {
+  width: 160px;
+  height: 160px;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #888585;
+}
+
+.profile .follow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.profile .follow h6 {
+  margin: .5rem;
+}
+
+.myfollowing .no-gutters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.myfollowing img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 1px solid #bd0de9;
+  padding: 5px;
+}
+/*# sourceMappingURL=index.css.map */
