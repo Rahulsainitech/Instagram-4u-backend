@@ -4,9 +4,20 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 const {secretKey} = require('../config/keys')
 const middleware = require('../middleware/requireLogin')
+//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
+// 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
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+const user = require('../models/user')
 
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth:{
+        api_key:"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"
+    }
+}))
 router.get('/protected',middleware, (req, res) => {
     res.send("hello I am router")
 })
@@ -15,7 +26,7 @@ router.post('/signupserver', (req, res) => {
     if (!name || !email || !password ) {
         return res.status(422).json({ "error": "please fill all the field properly" })
     }
-    User.findOne({ email: email })
+    User.findOne({ email:email })
         .then((saveUser) => {
             if (saveUser) {
                 return res.status(423).json({ "error": "user already exist with this email id" })
@@ -30,7 +41,16 @@ router.post('/signupserver', (req, res) => {
                         
                     })
                     user.save()
-                        .then(() => res.status(200).json({ "message": "user signed up successfully" }))
+                        .then((user) =>{
+                            transporter.sendMail({
+                                to:user.email,
+                                from:"uietece1923rahul@kuk.ac.in",
+                                subject:"signup success",
+                                html:`<h1>Welcome 😄 ${user.name} to instagram-4u</h1>
+                                <a href='https://mern-rahulsaini-tech.herokuapp.com'>developercontact...</a>`
+                            }) 
+                            res.status(200).json({ "message": "user signed up successfully" })
+                        })
                         .catch((error) => res.status(404).json({ "error": "data not saved" }))
                 })
             
@@ -66,6 +86,55 @@ router.post('/signIn',(req,res)=>{
         })
         .catch((err)=>console.log(err))
       
+    })
+})
+
+router.post('/reset-password',(req,res)=>{
+    crypto.randomBytes(32,(err,buffer)=>{
+        if(err){
+            console.log(err)
+        }
+        const token = buffer.toString('hex')
+        user.findOne({email:req.body.email})
+        .then(user=>{
+            if(!user){
+                res.status(422).json({error:"user not exist with this email id please signup first"})
+            }
+            user.resetToken = token
+            user.expireToken = Date.now()+3600000
+            user.save().then((result)=>{
+                transporter.sendMail({
+                    to:user.email,
+                    from:"uietece1923rahul@kuk.ac.in",
+                    subject:"password reset",
+                    html:`<p>Hello ${user.name} You requested for password reset</p>
+                    <h5>click on this <a href="https://instagram-4u.herokuapp.com/reset/${token}">link...</a></h5>`
+                })
+                res.status(201).json({message:"check your email"})
+            })
+        })
+    })
+})
+router.post('/new-password',(req,res)=>{
+    const newPassword = req.body.password
+    const sentToken = req.body.token
+    console.log(newPassword,sentToken)
+
+    user.findOne({resetToken: sentToken,expireToken:{$gt:Date.now()}})
+    .then(user=>{
+        if(!user){
+        return res.status(422).json({error:"Try again session expired"})
+        }
+        bcrypt.hash(newPassword,12).then(hashpassword=>{
+          user.password = hashpassword
+          user.resetToken = undefined
+          user.expireToken= undefined
+          user.save().then((savedUser)=>{
+              res.json({message:"password updated success"})
+          })  
+        })
+    }).catch(err=>{
+        console.log(err)
     })
 })
 module.exports = router

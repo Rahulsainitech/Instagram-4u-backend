@@ -70,11 +70,11 @@ const UserProfile = () => {
                     <div className='row d-flex justify-content-center my-4'>
                         <div className='col-md-8' >
                             <div className='row ' style={{ borderBottom: '1px solid grey' }}>
-                                <div className='col-12 col-md-4 mb-5 pic'>
+                                <div className='col-12 col-md-4 mb-3 pic'>
                                     <img src={userprofile.user.photo} />
                                 </div>
                                 
-                                <div className='col-md-6 mb-5'>
+                                <div className='col-md-6 col-md-mb-5'>
                                     <h3 className='text-center col-12 text-capitalize'>{userprofile.user.name}</h3>
                                     <h6 className='text-center col-12'>
                                         <a href={'mailto' + ':' + userprofile.user.email}>{userprofile.user.email}</a>
@@ -85,22 +85,23 @@ const UserProfile = () => {
                                         <h6>{userprofile.user.following.length} following</h6>
                                     </div>
                                 </div>
-                                <div style={{ marginLeft: 'auto' }} className='col-md-2'>
+                                <div  className='col-12 mx-auto  col-md-2'>
                                     {showfollower ?
                                         <button
-                                            className='btn btn-sm btn-primary'
+                                            className='btn btn-sm d-block mx-auto my-2 btn-primary'
                                             onClick={() => unfollower(userid)}>
                                             unfollow
                                         </button> :
                                         <button
-                                            className='btn btn-sm btn-primary'
+                                            className='btn btn-sm d-block mx-auto my-2 btn-primary'
                                             onClick={() => Follower(userid)}>
                                             follow
                                         </button>}
                                 </div>
                             </div>
                             <div className='row gallery mt-3'>
-                                {userprofile.data.map(item => {
+                                {
+                                    userprofile.data.map(item => {
                                     return (
                                         <>
                                             <img className='col-6 col-md-4 my-2' key={item._id} src={item.photo} />
@@ -116,7 +117,7 @@ const UserProfile = () => {
 
                 </div>
                 :
-                <h3 className='text-center d-flex justify-content-center' >loading...</h3>}
+                <h3 className='loading' >loading...</h3>}
         </>
 
     )

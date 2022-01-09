@@ -32,7 +32,7 @@ const Myfollower = () => {
                     const { postedBy } = item
                     return (<>
 
-                        <div className="col-12 card mb-3" style={{maxWidth: '600px'}}>
+                        <div className="col-12 card mb-3" style={{maxWidth: '600px'}} id={postedBy._id}>
                             <div className="row no-gutters">
                                 <div className="col-3 col-md-4 ">
                                     <img src={postedBy.photo} alt="..." />

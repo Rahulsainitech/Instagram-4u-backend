@@ -16,7 +16,7 @@ router.get('/allpost',requireLogin,async(req,res)=>{
 router.get('/getsubpost',requireLogin,async(req,res)=>{
     // if postedBy in following
     const data = await Post.find({postedBy:{$in : req.user.following}})
-    .populate("postedBy","_id name email photo ")
+    .populate("postedBy","_id name email photo",)
     .populate("comments.postedBy","_id  name")
     .sort('-createdAt')
     res.json({data})

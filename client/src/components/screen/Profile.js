@@ -18,7 +18,7 @@ const Profile = () => {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result)
+                console.log("data ",result)
                 setData(result.myPost)
 
             })
@@ -89,11 +89,11 @@ const Profile = () => {
     }, [image])
     return (
         <div className='container profile'>
-            <div className='row d-flex justify-content-center my-4'>
+            <div className='row d-flex justify-content-center '>
                 <div className='col-md-8' >
                     <div className='row ' style={{ borderBottom: '1px solid grey' }}>
                         {state ? <>
-                            <div className="input-group my-3 setting">
+                            <div className="input-group mb-3 setting">
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-user-cog" />
@@ -111,8 +111,8 @@ const Profile = () => {
                                 </li>
 
                             </div>
-                            <div className='col-12 col-md-5 mb-5 pic'>
-                                <img src={state.photo} />
+                            <div className='col-12 col-md-5   pic'>
+                                <img className=' ' src={state.photo} />
                             </div>
                             <div className='col-md-7 mb-5 mt-4'>
 
@@ -128,14 +128,15 @@ const Profile = () => {
 
                             </div>
                         </>
-                            : "loading"}
+                            : <h2 className='loading' >loading...</h2>}
                     </div>
                     <div className='row gallery mt-3'>
-                        {data.map(item => {
+                        {!data? <h4 className='loading' >loading...</h4>:
+                        data.map(item => {
                             return (
                                 <>
-                                <NavLink to='/' className='col-6 col-md-4 my-2 ' >
-                                    <img className='' key={item._id} src={item.photo} />
+                                <NavLink to={'/#'+item._id} className='col-6 col-md-4 my-2 ' >
+                                    <img className='' key={item._id} src={item.photo} alt='img'/>
                                 </NavLink>
                                 </>
                     )

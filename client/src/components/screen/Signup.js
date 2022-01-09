@@ -36,7 +36,7 @@ const Signup = () => {
     }
 
     useEffect(() => {
-        if(url){
+        if (url) {
             uploadField()
         }
     }, [url])
@@ -48,7 +48,7 @@ const Signup = () => {
         }
         try {
             const { name, email, password } = user
-             fetch('/signupserver', {
+            fetch('/signupserver', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -57,20 +57,20 @@ const Signup = () => {
                     name,
                     email,
                     password,
-                    photo:url
+                    photo: url
 
                 })
             })
-            .then(res=>res.json())
-            .then(result=>{
-                if (result.error) {
-                    alert(result.error)
-                } else if (result.message) {
-                    alert(result.message)
-                    history('/signin')
-                }
-            })
-            
+                .then(res => res.json())
+                .then(result => {
+                    if (result.error) {
+                        alert(result.error)
+                    } else if (result.message) {
+                        alert(result.message)
+                        history('/signin')
+                    }
+                })
+
         } catch (error) {
             console.log(error)
         }
@@ -123,7 +123,12 @@ const Signup = () => {
                         onChange={(e) => setImage(e.target.files[0])}
                     />
                     <button onClick={() => postData()} type="button" id="liveToastBtn" className="btn btn-primary my-3">signup</button>
-                    <NavLink to='/signin' className="">Already have an account ?<i className="fas fa-location-arrow" /></NavLink>
+                    <h5 className='text-center'>
+                        <NavLink to='/signin' className="text-dark">Already have an account ?<i className="fas fa-location-arrow" /></NavLink>
+                    </h5>
+                    <h6 className='text-center'>
+                        <NavLink to='/reset' className="text-danger">forgot password ?</NavLink>
+                    </h6>
                 </div>
             </div>
 

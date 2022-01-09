@@ -2,12 +2,11 @@ import React,{useState,useContext} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
 
-const Signin = () => {
-    const {state,dispatch} = useContext(UserContext)
+const Reset = () => {
+    // const {state,dispatch} = useContext(UserContext)
     const history = useNavigate()
     const [user, setUser] = useState({
-        email: "",
-        password: ""
+        email: ""
     })
     const inputData = (e) => {
         const name = e.target.name
@@ -23,16 +22,15 @@ const Signin = () => {
             if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
                 return alert("You have entered an invalid email address!")
             }
-            const {  email, password } = user
-              fetch('/signIn', {
+            const {  email } = user
+              fetch('/reset-password', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                    
                 },
                 body: JSON.stringify({
-                    email,
-                    password
+                    email
                 })
             })
             .then(res=>res.json())
@@ -42,13 +40,9 @@ const Signin = () => {
                 alert(data.error)
             
             } else {
-                
-                localStorage.setItem("jwt",(data.token))
-                localStorage.setItem("user",JSON.stringify(data.user))
-                dispatch({type:"USER",payload:data.user})
                 console.log("mytoken",data.token)
-                alert("You signed up successfully")
-                history('/')
+                alert(data.message)
+                history('/signin')
             }})
             .catch(err=>console.log(err))
         } catch (error) {
@@ -59,7 +53,7 @@ const Signin = () => {
         <div className='container signin'>
             <div className="card" >
                 <div className="card-body">
-                    <h5 className="card-title insta text-center">Instagram</h5>
+                    <h5 className="card-title insta">Instagram</h5>
                     <input
                         name='email'
                         value={user.email}
@@ -69,25 +63,13 @@ const Signin = () => {
                         placeholder="email"
                         required
                     />
-                    <input
-                        name='password'
-                        value={user.password}
-                        onChange={inputData}
-                        type="password"
-                        className="form-control my-3"
-                        placeholder="password"
-                        required />
-                    <button type="button" onClick={()=>postData()} className="btn btn-primary my-3">signin</button>
-                    <h5 className='text-center '>
-                    <NavLink to='/signup' style={{color:'rgb(32,52,111)',textDecoration:'none'}}>Don't have an account ?<i class="fas fa-location-arrow"/></NavLink>
-                    </h5>
-                    <h6 className='text-center'>
-                    <NavLink to='/reset' className="text-danger">forgot password ?</NavLink>
-                    </h6>
+                    
+                    <button type="button" onClick={()=>postData()} className="btn btn-primary my-3">reset password</button>
+                    {/* <NavLink to='/signup' className="">Don't have an account ?<i class="fas fa-location-arrow"/></NavLink> */}
                 </div>
             </div>
         </div>
     )
 }
 
-export default Signin
+export default Reset

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../../App'
 import { NavLink } from 'react-router-dom'
 
+
+
 const Myfollowing = () => {
     const [data, setData] = useState([])
     const { state, dispatch } = useContext(UserContext)
@@ -15,24 +17,19 @@ const Myfollowing = () => {
             .then((res) => res.json())
             .then(result => {
                 console.log("mypost data is", (result.data))
+                console.log(result)
                 setData(result.data)
-            })
+            }).catch(err=>console.log(err))
     }, [])
-
-   
-
-   
-    
     
     return (
 
         <div className='container home myfollowing'>
             {
                 data.map((item) => {
-                    const { postedBy, photo, body, likes, title } = item
+                    const { postedBy } = item
                     return (<>
-
-                        <div className="col-12 card mb-3" style={{maxWidth: '600px'}}>
+                        <div className="col-12 card mb-3" style={{maxWidth: '600px'}} id={postedBy._id}>
                             <div className="row no-gutters">
                                 <div className="col-3 col-md-4 ">
                                     <img src={postedBy.photo} alt="..." />

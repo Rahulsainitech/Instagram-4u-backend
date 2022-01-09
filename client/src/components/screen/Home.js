@@ -111,11 +111,11 @@ const Home = () => {
     return (
 
         <div className='container home'>
-            {
+            {!data? <h2 className='loading' >loading...</h2>:
                 data.map((item) => {
                     const { postedBy, photo, body, likes, title } = item
                     return (
-                        <div className="card" key={item._id} style={{ width: '36rem' }}>
+                        <div className="card" key={item._id} id={item._id} style={{ width: '36rem' }}>
                             <h6 style={{ position: 'relative' }} >
 
                                 <NavLink
