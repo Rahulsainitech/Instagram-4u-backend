@@ -13,7 +13,7 @@ router.get('/allpost',requireLogin,async(req,res)=>{
     .sort('-createdAt')
     res.json({data})
 })
-router.get('/getsubpost',requireLogin,async(req,res)=>{
+router.get('/getsubscriberpost',requireLogin,async(req,res)=>{
     // if postedBy in following
     const data = await Post.find({postedBy:{$in : req.user.following}})
     .populate("postedBy","_id name email photo",)
@@ -22,23 +22,33 @@ router.get('/getsubpost',requireLogin,async(req,res)=>{
     res.json({data})
 })
 
-router.get('/getfollowpost',requireLogin,async(req,res)=>{
-    // if postedBy in following
-    const data = await Post.find({postedBy:{$in : req.user.follower}})
-    .populate("postedBy","_id name email photo ")
-    .populate("comments.postedBy","_id  name")
-    .sort('-createdAt')
-    res.json({data})
-})
+// router.get('/getfollowpost',requireLogin,async(req,res)=>{
+//     // if postedBy in following
+//     const data = await Post.find({postedBy:{$in : req.user.follower}})
+//     .populate("postedBy","_id name email photo ")
+//     .populate("comments.postedBy","_id  name")
+//     .sort('-createdAt')
+//     res.json({data})
+// })
 
 router.get('/mypost',requireLogin,async(req,res)=>{
     const myPost = await Post.find({postedBy:req.user._id})
+    .populate("postedBy","_id name email photo")
     .populate("comments.postedBy","_id name")
-    .populate("postedBy","_id name email")
      .sort('-createdAt')
+     console.log(myPost)
     res.json({myPost})
 })
 
+router.get('/suserpost/:id',requireLogin,async(req,res)=>{
+    const id =req.params.id
+    const myPost = await Post.find({postedBy:id})
+    .populate("postedBy","_id name email photo")
+    .populate("comments.postedBy","_id name")
+     .sort('-createdAt')
+     console.log(myPost)
+    res.json({myPost})
+})
 router.post('/createpost',requireLogin,(req,res)=>{
     const {title,body,photo} = req.body
     console.log(title,body,photo)

@@ -47,4 +47,18 @@ router.put('/updatepic', requireLogin, (req, res) => {
         })
 })
 
+router.get('/getsubpost',requireLogin,async(req,res)=>{
+    // if postedBy in following
+    const data = await user.find({_id:req.user._id})
+    .populate("following")
+    console.log(data)
+    res.json({data})
+})
+
+router.get('/getfollowpost',requireLogin,async(req,res)=>{
+    // if postedBy in following
+    const data = await user.find({_id:req.user._id})
+    .populate("follower")
+    res.json({data})
+})
 module.exports = router

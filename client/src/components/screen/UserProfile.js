@@ -4,10 +4,11 @@ import { NavLink, useParams } from 'react-router-dom'
 
 const UserProfile = () => {
     const { userid } = useParams()
-    // console.log(userid)
+    console.log(userid)
     const [userprofile, setUserprofile] = useState('')
     const { state, dispatch } = useContext(UserContext)
-    const [showfollower, setShowFollower] = useState(true)
+    const [showfollower, setShowFollower] = useState(false)
+
     useEffect(() => {
         fetch(`/user/${userid}`, {
             method: "GET",
@@ -20,7 +21,7 @@ const UserProfile = () => {
                 console.log("result from user profile", result)
                 // setData(result.data)
                 setUserprofile(result)
-                setShowFollower(result.user.following.include(userid))
+
 
             })
 
@@ -44,6 +45,7 @@ const UserProfile = () => {
             })
 
     }
+
     const unfollower = (userid) => {
         fetch('/unfollow', {
             method: "PUT",
@@ -73,20 +75,21 @@ const UserProfile = () => {
                                 <div className='col-12 col-md-4 mb-3 pic'>
                                     <img src={userprofile.user.photo} />
                                 </div>
-                                
+
                                 <div className='col-md-6 col-md-mb-5'>
                                     <h3 className='text-center col-12 text-capitalize'>{userprofile.user.name}</h3>
                                     <h6 className='text-center col-12'>
                                         <a href={'mailto' + ':' + userprofile.user.email}>{userprofile.user.email}</a>
                                     </h6>
                                     <div className='follow'>
-                                        <h6>{userprofile.data.length} post</h6>
+                                        <h6><NavLink to={'/userpost/'+userid}>{userprofile.data.length}post</NavLink></h6>
                                         <h6>{userprofile.user.follower.length} follower</h6>
                                         <h6>{userprofile.user.following.length} following</h6>
                                     </div>
                                 </div>
-                                <div  className='col-12 mx-auto  col-md-2'>
+                                <div className='col-12 mx-auto  col-md-2'>
                                     {showfollower ?
+
                                         <button
                                             className='btn btn-sm d-block mx-auto my-2 btn-primary'
                                             onClick={() => unfollower(userid)}>
@@ -102,14 +105,15 @@ const UserProfile = () => {
                             <div className='row gallery mt-3'>
                                 {
                                     userprofile.data.map(item => {
-                                    return (
-                                        <>
-                                            <img className='col-6 col-md-4 my-2' key={item._id} src={item.photo} />
-                                        </>
-                                    )
-                                })
+                                        return (
+                                            <>
+                                                <NavLink to={'/userpost/'+userid} className='col-4 col-md-4 my-2'>
+                                                    <img key={item._id} src={item.photo} />
+                                                </NavLink>
+                                            </>
+                                        )
+                                    })
                                 }
-
 
                             </div>
                         </div>

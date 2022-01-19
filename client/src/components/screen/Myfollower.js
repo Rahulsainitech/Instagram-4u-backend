@@ -14,8 +14,8 @@ const Myfollower = () => {
         })
             .then((res) => res.json())
             .then(result => {
-                console.log("mypost data is", (result.data))
-                setData(result.data)
+                console.log("mypost data is", (result.data[0].follower))
+                setData(result.data[0].follower)
             })
     }, [])
 
@@ -25,36 +25,35 @@ const Myfollower = () => {
     
     
     return (
+        
 
-        <div className='container home myfollowing'>
-            {
-                data.map((item) => {
-                    const { postedBy } = item
-                    return (<>
-
-                        <div className="col-12 card mb-3" style={{maxWidth: '600px'}} id={postedBy._id}>
+         <div className='container home myfollowing '>
+         <h4 className='folohead col-12 bg-primary text-white col-md-6'>My follower</h4>
+             {
+                 data.map((item) => {
+                     const { name ,_id,photo ,email} = item
+                     return (<>
+                        <div className="col-12 card mb-3" style={{maxWidth: '600px'}} id={_id}>
                             <div className="row no-gutters">
                                 <div className="col-3 col-md-4 ">
-                                    <img src={postedBy.photo} alt="..." />
+                                    <img src={photo} alt="img" />
                                 </div>
                                 <div className="col-6 col-md-5">
                                     <div className="card-body">
-                                        <h5 className=" card-title text-capitalize">{postedBy.name}</h5>
-                                        <p className=""> {postedBy.email}</p>
+                                        <h5 className=" card-title text-capitalize">{name}</h5>
+                                        <p className=""> {email}</p>
                                     </div>
                                 </div>
                                 <div className='col-3 col-md-3'>
-                                    <NavLink  to={state._id===postedBy._id?'/profile':'/profile/' + postedBy._id}>visit profile<i class="fas fa-location-arrow px-3" /></NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                       
+                                  <NavLink  to={state._id===_id?'/profile':'/profile/' + _id}>visit profile<i class="fas fa-location-arrow px-3" /></NavLink>
+                              </div>
+                          </div>
+                      </div>      
                     </>
                     )
                 })
             }
-        </div>
+         </div>
 
     )
 }

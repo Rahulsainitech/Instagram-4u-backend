@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../../App'
-import { NavLink } from 'react-router-dom'
+import { NavLink ,useParams} from 'react-router-dom'
 
-const Myfollopost = () => {
+const Suserpost = () => {
+    const {userid} =useParams()
+    console.log("user id is ",userid)
     const [data, setData] = useState([])
     const { state, dispatch } = useContext(UserContext)
     useEffect(() => {
-        fetch('/getsubscriberpost', {
+        fetch(`/suserpost/${userid}`, {
             method: 'GET',
             headers: {
                 'Authorization': "Bearer " + localStorage.getItem('jwt')
@@ -14,8 +16,8 @@ const Myfollopost = () => {
         })
             .then((res) => res.json())
             .then(result => {
-                console.log("allpost data is", (result.data))
-                setData(result.data)
+                console.log("allpost data is", (result.myPost))
+                setData(result.myPost)
             })
     }, [])
 
@@ -120,7 +122,7 @@ const Myfollopost = () => {
 
                                 <NavLink 
                                 to={state._id===postedBy._id?'/profile':'/profile/' + postedBy._id}>
-                                    <img className='postimage' src={state.photo} alt="img" />
+                                    <img className='postimage' src={postedBy.photo} alt="img" />
 
                                     {postedBy.name}<i class="fas fa-location-arrow px-3"/>
                                 </NavLink>
@@ -180,4 +182,4 @@ const Myfollopost = () => {
     )
 }
 
-export default Myfollopost;
+export default Suserpost;

@@ -127,6 +127,9 @@
       -ms-flex-pack: center;
           justify-content: center;
   font-family: 'Grand Hotel', cursive;
+  position: absolute;
+  top: 40vh;
+  text-align: center;
 }
 
 .profile {
@@ -142,6 +145,7 @@
 }
 
 .profile .gallery a img {
+  max-height: 250px;
   height: 100%;
   width: 100%;
 }
@@ -210,6 +214,32 @@
   margin: .5rem;
 }
 
+.myfollowing {
+  margin-top: 7rem;
+}
+
+.myfollowing .card {
+  padding: 0px !important;
+}
+
+.myfollowing .card .card-body {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.myfollowing .card .card-body .card-title {
+  margin-bottom: 0px !important;
+  padding-top: 3px !important;
+}
+
+.myfollowing .folohead {
+  border-radius: 4px;
+  font-family: sans-serif;
+  text-align: center;
+  padding: .6rem 0;
+  margin: auto;
+}
+
 .myfollowing .no-gutters {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -223,10 +253,11 @@
 }
 
 .myfollowing img {
-  height: 80px;
-  width: 80px;
+  margin: 4px;
+  height: 70px;
+  width: 70px;
   border-radius: 50%;
   border: 1px solid #bd0de9;
-  padding: 5px;
+  padding: 2px;
 }
 /*# sourceMappingURL=index.css.map */

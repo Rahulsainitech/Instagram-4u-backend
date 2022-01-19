@@ -2,20 +2,21 @@ import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../../App'
 import { NavLink } from 'react-router-dom'
 
-const Myfollopost = () => {
+const Mypost = () => {
     const [data, setData] = useState([])
     const { state, dispatch } = useContext(UserContext)
     useEffect(() => {
-        fetch('/getsubscriberpost', {
+        fetch('/mypost', {
             method: 'GET',
             headers: {
-                'Authorization': "Bearer " + localStorage.getItem('jwt')
+                "Authorization": "Bearer " + localStorage.getItem('jwt')
             }
         })
             .then((res) => res.json())
             .then(result => {
-                console.log("allpost data is", (result.data))
-                setData(result.data)
+                console.log("mypost data is", result.myPost)
+
+                setData(result.myPost)
             })
     }, [])
 
@@ -111,18 +112,18 @@ const Myfollopost = () => {
     return (
 
         <div className='container home'>
-            {
+            {!data? <h2 className='loading' >loading...</h2>:
                 data.map((item) => {
                     const { postedBy, photo, body, likes, title } = item
                     return (
-                        <div className="card" key={item._id} style={{ width: '36rem' }}>
-                            <h6 style={{ position: 'relative' }} className='p-2'>
+                        <div className="card" key={item._id} id={item._id} style={{ width: '36rem' }}>
+                            <h6 style={{ position: 'relative' }} >
 
-                                <NavLink 
-                                to={state._id===postedBy._id?'/profile':'/profile/' + postedBy._id}>
-                                    <img className='postimage' src={state.photo} alt="img" />
-
-                                    {postedBy.name}<i class="fas fa-location-arrow px-3"/>
+                                <NavLink
+                                    to={state._id === postedBy._id ? '/profile' : '/profile/' + postedBy._id}>
+                                    <img className='postimage' src={postedBy.photo} alt="img" />
+                                    {postedBy.name}
+                                    <i class="fas fa-location-arrow px-3" />
                                 </NavLink>
 
                                 {(item.postedBy._id === state._id) &&
@@ -132,7 +133,7 @@ const Myfollopost = () => {
                             </h6>
                             {
                                 <img
-                                    src={photo} onDoubleClick={item.likes.includes(state._id) ? () => unlikepost(item._id) : () => likepost(item._id)}
+                                    src={photo} key={item._id} onDoubleClick={item.likes.includes(state._id) ? () => unlikepost(item._id) : () => likepost(item._id)}
                                     className="card-img-top" alt={title} />
                             }
                             <div className="card-body">
@@ -180,4 +181,4 @@ const Myfollopost = () => {
     )
 }
 
-export default Myfollopost;
+export default Mypost

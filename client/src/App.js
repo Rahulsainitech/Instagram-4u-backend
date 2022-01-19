@@ -11,10 +11,12 @@ import Create from './components/screen/Create';
 import './index'
 import { reducer, initialState } from './reducers/userReducer';
 import Myfollopost from './components/screen/Myfollowpost';
+import Suserpost from './components/screen/Suserpost';
 import Myfollowing from './components/screen/Myfollowing';
 import Myfollower from './components/screen/Myfollower';
 import Reset from './components/screen/Reset';
 import NewPassword from './components/screen/NewPassword';
+import Mypost from './components/screen/Mypost';
 export const UserContext = createContext()
 
 const Routing = () => {
@@ -36,10 +38,12 @@ const Routing = () => {
     return (
         <Routes>
             <Route exact path='/' element={<Home />} />
+            <Route exact path='/myallpost' element={<Mypost />} />
             <Route  path='/signin' element={<Signin />} />
             <Route  path='/signup' element={<Signup />} />
             <Route  path='/create' element={<Create />} />
             <Route  path='/myfollowpost' element={<Myfollopost />} />
+            <Route  path='/userpost/:userid' element={<Suserpost />} />
             <Route  path='/profile' element={<Profile />} />
             <Route  path='/myfollower' element={<Myfollower />} />
             <Route  path='/myfollowing' element={<Myfollowing />} />

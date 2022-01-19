@@ -121,7 +121,7 @@ const Profile = () => {
                                     <a href={"mailto:" + state.email}>{state.email}</a>
                                 </h6>
                                 <div className='follow'>
-                                    <h6>{data.length} post</h6>
+                                    <h6>{data.length}<NavLink to={'/myallpost'}>post</NavLink></h6>
                                     <NavLink to='/myfollower'><h6>{state.follower.length} follower</h6></NavLink>
                                     <NavLink to='/myfollowing'><h6>{state.following.length} following</h6></NavLink>
                                 </div>
@@ -135,7 +135,7 @@ const Profile = () => {
                         data.map(item => {
                             return (
                                 <>
-                                <NavLink to={'/#'+item._id} className='col-6 col-md-4 my-2 ' >
+                                <NavLink to={'/myallpost/#'+item._id} className='col-4 col-md-4 my-2 ' >
                                     <img className='' key={item._id} src={item.photo} alt='img'/>
                                 </NavLink>
                                 </>

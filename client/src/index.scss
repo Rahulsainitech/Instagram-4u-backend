@@ -22,8 +22,7 @@
 .navbar1{
     border-bottom: 1px solid rgb(99, 102, 99);
     .navbar-brand{
-        font-size: 2rem;
-       
+        font-size: 2rem;  
     }
     .navbar{
         margin: 0 !important;
@@ -105,9 +104,13 @@
         button{display: block;}
     }
 }
+
 .loading{
     @include flexprop();
     font-family: 'Grand Hotel', cursive;
+    position:absolute;
+    top:40vh;
+    text-align: center;
 }
 .profile{
     margin-top: 7rem;
@@ -116,6 +119,7 @@
         flex-wrap: wrap;
         a{
             img{
+                max-height: 250px;
                 height: 100%;
                 width: 100%;
             }
@@ -163,15 +167,35 @@
     }
 }
 .myfollowing{
+    margin-top: 7rem;
+    .card{
+        padding: 0px !important;
+        .card-body{
+            padding-top:0px !important ;
+            padding-bottom:0px !important ;
+            .card-title{
+                margin-bottom: 0px !important;
+                padding-top: 3px !important;
+            }
+        }
+    }
+    .folohead{
+        border-radius: 4px;
+        font-family: sans-serif;
+        text-align: center;
+        padding:.6rem 0;
+        margin: auto;
+    }
     .no-gutters{
 @include flexprop();
     }
     img{
-        height: 80px;
-        width: 80px;
+        margin: 4px;
+        height: 70px;
+        width: 70px;
         border-radius: 50%;
         border: 1px solid rgb(189, 13, 233);
-        padding: 5px;
+        padding: 2px;
 
     }
 }
