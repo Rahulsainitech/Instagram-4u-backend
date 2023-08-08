@@ -9,9 +9,8 @@ require('./models/post')
 // mongoose.model('user')
 app.use(express.json())
 app.use(router)
-app.use(require('./routes/postroute'))
-app.use(require('./routes/user'))
-
+app.use(require("/api/posts/",'./routes/postroute'))
+app.use(require("/api/users/",'./routes/user'))
 
 mongoose.connect(keys)
 .then(()=>{console.log('connection is successfull')})
