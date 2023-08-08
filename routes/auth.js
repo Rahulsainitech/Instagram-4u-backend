@@ -7,15 +7,13 @@ const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
 const {secretKey} = require('../config/keys')
 const middleware = require('../middleware/requireLogin')
-//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
-// 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
 const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 const user = require('../models/user')
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth:{
-        api_key:"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"
+        api_key:process.env.twillokey
     }
 }))
 router.get('/protected',middleware, (req, res) => {
